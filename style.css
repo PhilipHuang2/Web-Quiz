@@ -1,0 +1,30 @@
+:root {
+    --color-1 : #F7DD72; /*Jasmine*/
+    --color-2 : #334E58;  /*Charcoal*/
+    --color-3 : #00A878; /* Green Munsell*/
+    --color-4 : #0AD3FF; /*Vivid Sky Blue*/
+    --color-5 : #E4D9FF; /*Lavender Blue*/
+}
+
+* {
+    box-sizing: border-box;
+}
+
+header {
+    background-color: var(--color-5);
+}
+
+h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+h2 {
+    font-size: px;
+    text-align: center;
+}
+
+h2 > button {
+    margin-top: 30px;
+    font-size: 24px;
+}
