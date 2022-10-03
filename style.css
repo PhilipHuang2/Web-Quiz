@@ -28,3 +28,20 @@ h2 {
 h2 > button {
     font-size: 24px;
 }
+
+.question {
+    margin: 10px;
+    font-size: 30px;
+    text-decoration: bold;
+    text-align: center;
+    display: none;
+}
+
+.answers {
+    text-align:center;
+    display: none;
+}
+
+.answers > ul > li {
+    margin: 20px;
+}
