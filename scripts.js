@@ -7,10 +7,33 @@ var timeLeft = 60;
 timeTitle.textContent = "Time Remaining:"
 timer.textContent = timeLeft;
 
+
+// for each button, an event listener listen, if the data says
+// the answer is correct we do nothing.
+// otherwise we decrement the timer by 10
+var answerButtons = document.querySelectorAll("li");
+answerButtons.forEach(choice => {
+    choice.addEventListener('click', function() {
+        if(choice.getAttribute("data-answer") != "true")
+            timeLeft = timeLeft - 10;
+        populateQuestion(question2);
+    })
+});
+
+
 var question = { title: "Which of these languages is not commonly used in web development?",
     answers: ["CSS", "Javascript", "HTML", "Scratch"],
     trueAnswer: 3
 }
+
+var question2 = {
+    title: "Which of these element tags is not a semantic tag.",
+    answers: [ "div", "body", "header", "nav"],
+    trueAnswer: 0
+}
+
+
+
 
 // When I click the button, delete the start button
 // and add 2 h2 tags, and start counting down
@@ -52,18 +75,13 @@ function populateQuestion(newQuestion) {
     for(var i = 0; i < buttonList.children.length; i++)
     {
         dummyLi = buttonList.children[i];
-        console.log(dummyLi);
+        // console.log(dummyLi);
         dummyLi.children[0].textContent = newQuestion.answers[i];
+        // set data-answer = true for the right answer.
         if(newQuestion.trueAnswer == i)
             dummyLi.setAttribute("data-answer",true);
         else
             dummyLi.setAttribute('data-answer',false);
     }
-    
-
-
-    
-
-
 }
 
