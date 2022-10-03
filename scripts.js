@@ -27,10 +27,19 @@ var question = { title: "Which of these languages is not commonly used in web de
 }
 
 var question2 = {
-    title: "Which of these element tags is not a semantic tag.",
+    title: "Which of these element tags is not a semantic tag?",
     answers: [ "div", "body", "header", "nav"],
     trueAnswer: 0
 }
+
+var question3 = {
+    title: "Where in the HTML document is should the Javascript be placed.",
+    answers: ["The Top of the body", "Outside the of the Body", "The bottom of the body", "In the head"],
+    trueAnswer: 2
+}
+
+var questionLog = [question, question2, question3];
+console.log(questionLog);
 
 
 
