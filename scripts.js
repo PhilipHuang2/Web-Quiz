@@ -4,6 +4,9 @@ var timer = document.createElement("h2");
 var questionTitle = document.querySelector(".question");
 var answerList = document.querySelector(".answers");
 var timeLeft = 60;
+//initialize timer function outside so Game Progression can call it
+var timeInterval;
+
 timeTitle.textContent = "Time Remaining:"
 timer.textContent = timeLeft;
 
@@ -16,7 +19,7 @@ answerButtons.forEach(choice => {
     choice.addEventListener('click', function() {
         if(choice.getAttribute("data-answer") != "true")
             timeLeft = timeLeft - 10;
-        populateQuestion(question2);
+        gameProgression(questionLog);
     })
 });
 
@@ -39,7 +42,7 @@ var question3 = {
 }
 
 var questionLog = [question, question2, question3];
-console.log(questionLog);
+var logIndex = 0;
 
 
 
@@ -51,12 +54,32 @@ button.addEventListener("click",function(){
     document.querySelector("main").prepend(timeTitle);
     startTime();
     button.parentElement.remove();
-    populateQuestion(question);
+    gameProgression(questionLog);
 });
+
+// iterates through the quiz array and ends the game if it ends
+// call the function whenever a new question needs to appear
+function gameProgression(questionArray) {
+    console.log("I am in Game progression");
+    console.log(logIndex);
+    if(logIndex < questionArray.length)
+    {
+        populateQuestion(questionArray[logIndex]);
+        logIndex++;
+    }
+    else {
+    //  will eventually call the enter score then leaderboard screen.
+        console.log("end game");
+        clearInterval(timeInterval);
+    }
+        
+    
+}
+// gameProgression(questionLog, logIndex);
 
 // creates a timer that counts down until 0
 function startTime() {
-    var timeInterval = setInterval(function() {
+    timeInterval = setInterval(function() {
         timeLeft = timeLeft -1;
         if(timeLeft > 0)
             timer.textContent = timeLeft.toString();
