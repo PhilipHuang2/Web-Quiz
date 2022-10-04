@@ -69,13 +69,11 @@ function gameProgression(questionArray) {
     }
     else {
     //  will eventually call the enter score then leaderboard screen.
-        console.log("end game");
-        clearInterval(timeInterval);
-    }
         
-    
+        clearInterval(timeInterval);
+        endGame();
+    }
 }
-// gameProgression(questionLog, logIndex);
 
 // creates a timer that counts down until 0
 function startTime() {
@@ -89,7 +87,6 @@ function startTime() {
             clearInterval(timeInterval);
         }
     },1000);
-
 }
 
 //Set the question block to block (ie. not none)
@@ -117,3 +114,25 @@ function populateQuestion(newQuestion) {
     }
 }
 
+function endGame(){
+    //reset all variables to start position
+    questionTitle.style.display = "none";
+    answerList.style.display = "none";
+    logIndex = 0;
+    var intials = prompt("wow, you won! Please enter your intials to join the scoreboard.", "PH");
+    
+    
+    var scoreBoard = localStorage.getItem('players');
+    if(scoreBoard) {
+       //extract the scoreboard from local storage and insert new player at end
+        scoreBoard = JSON.parse(scoreBoard);
+        scoreBoard.push([intials,timeLeft]);
+    }
+    else {
+         // if there is no scoreboard, create one and put the current player into index 0
+        scoreBoard = [[intials,timeLeft]];   
+    }
+    localStorage.setItem("players", JSON.stringify(scoreBoard));
+    // show score board and ask player to restart the browser to play again.
+    
+}
