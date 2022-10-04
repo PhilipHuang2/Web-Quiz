@@ -83,8 +83,8 @@ function startTime() {
             timer.textContent = timeLeft.toString();
         else
         {
-            timer.textContent = "";
             clearInterval(timeInterval);
+            endGame();
         }
     },1000);
 }
@@ -119,7 +119,8 @@ function endGame(){
     questionTitle.style.display = "none";
     answerList.style.display = "none";
     logIndex = 0;
-    var intials = prompt("wow, you won! Please enter your intials to join the scoreboard.", "PH");
+    
+    var intials = prompt("The quiz has finished! Please enter your intials to join the scoreboard.", "PH");
     
     
     var scoreBoard = localStorage.getItem('players');
@@ -134,5 +135,41 @@ function endGame(){
     }
     localStorage.setItem("players", JSON.stringify(scoreBoard));
     // show score board and ask player to restart the browser to play again.
+    //clear the board
+    var newScreen = document.querySelector('main');
+    newScreen.innerHTML = "";
     
+    //adding header for scoreboard
+    var table = document.createElement('table');
+    var tr = document.createElement('tr');
+    var th = document.createElement('th');
+    th.textContent = "Player Initials"
+    tr.append(th);
+    th = document.createElement('th');
+    th.textContent = "Score";
+    tr.append(th);
+    table.append(tr);
+    
+    var scoringBoard = document.createElement('table');
+    for(var loop = 0; loop < scoreBoard.length; loop++)
+    {
+        tr = document.createElement('tr');
+        th = document.createElement('th');
+        th.textContent = scoreBoard[loop][0];
+        tr.append(th);
+        th = document.createElement('th');
+        th.textContent = scoreBoard[loop][1];
+        tr.append(th);
+        table.append(tr);
+    }
+    newScreen.append(table);
+    var div = document.createElement("div")
+    div.className = "score-header";
+    div.textContent = "Well Done!  Please restart the browser to play again";
+    newScreen.prepend(div);
+
+    // setting the title to be Score Board
+    document.querySelector('h1').textContent = "Score Board";
+
+
 }
