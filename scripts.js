@@ -69,13 +69,11 @@ function gameProgression(questionArray) {
     }
     else {
     //  will eventually call the enter score then leaderboard screen.
-        console.log("end game");
-        clearInterval(timeInterval);
-    }
         
-    
+        clearInterval(timeInterval);
+        endGame();
+    }
 }
-// gameProgression(questionLog, logIndex);
 
 // creates a timer that counts down until 0
 function startTime() {
@@ -85,11 +83,10 @@ function startTime() {
             timer.textContent = timeLeft.toString();
         else
         {
-            timer.textContent = "";
             clearInterval(timeInterval);
+            endGame();
         }
     },1000);
-
 }
 
 //Set the question block to block (ie. not none)
@@ -117,3 +114,62 @@ function populateQuestion(newQuestion) {
     }
 }
 
+function endGame(){
+    //reset all variables to start position
+    questionTitle.style.display = "none";
+    answerList.style.display = "none";
+    logIndex = 0;
+    
+    var intials = prompt("The quiz has finished! Please enter your intials to join the scoreboard.", "PH");
+    
+    
+    var scoreBoard = localStorage.getItem('players');
+    if(scoreBoard) {
+       //extract the scoreboard from local storage and insert new player at end
+        scoreBoard = JSON.parse(scoreBoard);
+        scoreBoard.push([intials,timeLeft]);
+    }
+    else {
+         // if there is no scoreboard, create one and put the current player into index 0
+        scoreBoard = [[intials,timeLeft]];   
+    }
+    localStorage.setItem("players", JSON.stringify(scoreBoard));
+    // show score board and ask player to restart the browser to play again.
+    //clear the board
+    var newScreen = document.querySelector('main');
+    newScreen.innerHTML = "";
+    
+    //adding header for scoreboard
+    var table = document.createElement('table');
+    var tr = document.createElement('tr');
+    var th = document.createElement('th');
+    th.textContent = "Player Initials"
+    tr.append(th);
+    th = document.createElement('th');
+    th.textContent = "Score";
+    tr.append(th);
+    table.append(tr);
+    
+    var scoringBoard = document.createElement('table');
+    for(var loop = 0; loop < scoreBoard.length; loop++)
+    {
+        tr = document.createElement('tr');
+        th = document.createElement('th');
+        th.textContent = scoreBoard[loop][0];
+        tr.append(th);
+        th = document.createElement('th');
+        th.textContent = scoreBoard[loop][1];
+        tr.append(th);
+        table.append(tr);
+    }
+    newScreen.append(table);
+    var div = document.createElement("div")
+    div.className = "score-header";
+    div.textContent = "Well Done!  Please restart the browser to play again";
+    newScreen.prepend(div);
+
+    // setting the title to be Score Board
+    document.querySelector('h1').textContent = "Score Board";
+
+
+}
