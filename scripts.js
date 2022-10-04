@@ -139,7 +139,7 @@ function endGame(){
     var newScreen = document.querySelector('main');
     newScreen.innerHTML = "";
     
-    //adding header for scoreboard
+    //creating scoreboard table, and adding header
     var table = document.createElement('table');
     var tr = document.createElement('tr');
     var th = document.createElement('th');
@@ -150,6 +150,7 @@ function endGame(){
     tr.append(th);
     table.append(tr);
     
+    // populate scoreboard rows with data from localstorage
     var scoringBoard = document.createElement('table');
     for(var loop = 0; loop < scoreBoard.length; loop++)
     {
@@ -162,7 +163,9 @@ function endGame(){
         tr.append(th);
         table.append(tr);
     }
+    //adding table to main
     newScreen.append(table);
+    //adding the rest of the elements for readability
     var div = document.createElement("div")
     div.className = "score-header";
     div.textContent = "Well Done!  Please restart the browser to play again";
