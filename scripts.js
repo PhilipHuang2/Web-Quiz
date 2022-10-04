@@ -60,8 +60,6 @@ button.addEventListener("click",function(){
 // iterates through the quiz array and ends the game if it ends
 // call the function whenever a new question needs to appear
 function gameProgression(questionArray) {
-    console.log("I am in Game progression");
-    console.log(logIndex);
     if(logIndex < questionArray.length)
     {
         populateQuestion(questionArray[logIndex]);
@@ -103,8 +101,7 @@ function populateQuestion(newQuestion) {
     //iterate through each li, and place textContent in the button inside li
     for(var i = 0; i < buttonList.children.length; i++)
     {
-        dummyLi = buttonList.children[i];
-        // console.log(dummyLi);
+        dummyLi = buttonList.children[i];        
         dummyLi.children[0].textContent = newQuestion.answers[i];
         // set data-answer = true for the right answer.
         if(newQuestion.trueAnswer == i)
