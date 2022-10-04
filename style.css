@@ -11,12 +11,15 @@
 }
 
 header {
-    background-color: var(--color-5);
+    
+    background-color: var(--color-3);
 }
 
 h1 {
     font-size: 36px;
     text-align: center;
+    padding-bottom: 15px;
+    
 }
 
 h2 {
